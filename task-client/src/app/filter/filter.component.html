@@ -1,0 +1,19 @@
+<div class="container">
+  <!-- <div class="row button-panel">
+    <button type="button" class="btn btn-info">Order by Name <i></i> </button>
+    <button type="button" class="btn btn-info">Order by Date <i></i> </button>
+    <button type="button" class="btn btn-info">Order by priority <i></i> </button>
+  </div> -->
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-2 ">
+      <h2>Overdue Tasks</h2>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor = "let overdue of overdueTask"> {{overdue.name}} - {{overdue.priority}} - {{overdue.dueDate}}</li>
+        </ul>
+    </div>
+
+    <div class="col-sm-4 col-sm-offset-2 ">
+      <h2>Pending Tasks</h2>
+    </div>
+  </div>
+</div>

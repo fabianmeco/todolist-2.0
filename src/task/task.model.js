@@ -23,3 +23,5 @@ Task.delete = function(id){
 Task.update = function(id, bodyTask){
     return knex('tasks').update('bodyTask').where({id:id})
 }
+
+module.exports = Task;

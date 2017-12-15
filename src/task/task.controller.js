@@ -7,8 +7,8 @@ exports.post = function (req, res) {
         .catch(err => res.status(500).send([{ name: "Internal error", message: err.message }]));
 }
 
-exports.get = function (req, res) {
-    return taskModel.findAll(req.query.overdue === 'true')
+exports.get = function (req, res) {console.log(req.query);
+    return taskModel.findAll(req.query)
         .then(task => res.json(task))
         .catch(err => res.status(500).send([{ name: "Internal error", message: err.message }]))
 }

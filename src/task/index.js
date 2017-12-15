@@ -10,7 +10,7 @@ router.post('/', middlewares.validateBody(taskValidators.post), taskController.p
 
 router.get('/', taskController.get);
 
-router.getOneMiddleware('/:id', taskController.getOneMiddleware, instanceRouter);
+router.use('/:id', taskController.getOneMiddleware, instanceRouter);
 
 instanceRouter.get('/', taskController.getOne);
 

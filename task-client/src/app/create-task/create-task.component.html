@@ -1,3 +1,56 @@
-<div class="container">
-  <form action="" #taskForm="form"></form>
+<div class="container">  
+  <ngb-alert *ngIf = "alertOpen" [type]="alertType" (close) = "onCloseAlert()" >{{message}} </ngb-alert>
+  <span class="border border-info rounded">
+    <form ng-submit="onSaveTask()" #taskForm="ngForm">
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-1">
+          <label class="input-group" for="name">
+            <span class="input-group-addon">Name</span>
+            <input type="text" name="name" id="name" class="form-control" [(ngModel)]="task.name" #name="ngModel">
+          </label>
+          <div *ngIf="name.invalid && (name.touched || createForm.submitted)" class="alert alert-danger">
+            <div *ngIf="name.errors.serverError">
+              {{errors['name']}}
+            </div>
+            <div *ngIf="name.errors.required">
+              The name is required to register a task
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-sm-offset-2">
+            <label class="input-group" for="dueDate">
+              <span class="input-group-addon">Due Date</span>
+              <input type="date" name="dueDate" id="dueDate" class="form-control" [(ngModel)]="task.dueDate" #dueDate="ngModel">
+            </label>
+            <div *ngIf="dueDate.invalid && (dueDate.touched || createForm.submitted)" class="alert alert-danger">
+              <div *ngIf="dueDate.errors.serverError">
+                {{errors['dueDate']}}
+              </div>
+              <div *ngIf="dueDate.errors.required">
+                The date is required to register a task
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-1">
+            <label class="input-group" for="priority">
+                <span class="input-group-addon">Priority</span>
+                <input type="number" name="priority" id="priority" class="form-control" [(ngModel)]="task.priority" #priority="ngModel">
+              </label>
+              <div *ngIf="priority.invalid && (priority.touched || createForm.submitted)" class="alert alert-danger">
+                <div *ngIf="priority.errors.serverError">
+                  {{errors['priority']}}
+                </div>
+                <div *ngIf="priority.errors.required">
+                  The priority field is required to register a task
+                </div>
+              </div>
+        </div>
+        <div class="col-sm-4 col-sm-offset-2">
+            <button type="submit" class="btn btn-success">Create Task</button>
+          </div>
+      </div>
+    </form>
+  </span>
 </div>
