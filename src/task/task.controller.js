@@ -2,13 +2,15 @@
 const taskModel = require('./task.model');
 
 exports.post = function (req, res) {
+    console.log("zzzzzzzzzzzzzzzzzzzz")
     return taskModel.create(req.body)
         .then(task => res.json(task))
         .catch(err => res.status(500).send([{ name: "Internal error", message: err.message }]));
 }
 
-exports.get = function (req, res) {console.log(req.query);
-    return taskModel.findAll(req.query)
+exports.get = function (req, res) {
+    let where = JSON.parse(req.query.where);    
+    return taskModel.findAll(where[0])
         .then(task => res.json(task))
         .catch(err => res.status(500).send([{ name: "Internal error", message: err.message }]))
 }

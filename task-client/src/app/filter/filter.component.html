@@ -5,15 +5,62 @@
     <button type="button" class="btn btn-info">Order by priority <i></i> </button>
   </div> -->
   <div class="row">
-    <div class="col-sm-4 col-sm-offset-2 ">
+    <div class="col-sm-4 col-sm-offset-1 ">
       <h2>Overdue Tasks</h2>
-        <ul class="list-group">
-          <li class="list-group-item" *ngFor = "let overdue of overdueTask"> {{overdue.name}} - {{overdue.priority}} - {{overdue.dueDate}}</li>
-        </ul>
+      <table class="talbe table-striped" [mfData]="data" #mf = "mfDataTable" [mfRowsOnPage]="10">
+        <thead>
+          <tr>
+            <th style="width: 33%"> 
+              <mfDefaultSorter by="name">Name</mfDefaultSorter>
+            </th>
+            <th style="width: 33%">
+                <mfDefaultSorter by="priority">Priority</mfDefaultSorter>
+            </th>
+            <th style="width: 33%">
+                <mfDefaultSorter by="dueDate">Due date</mfDefaultSorter>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let overdue of overdueTasks">
+            <td>{{overdue.name}}</td>
+            <td>{{overdue.priority}}</td>
+            <td>{{overdue.dueDate}}</td>
+          </tr>
+        </tbody>
+      </table>
+        <!-- <ul class="list-group">
+          <li class="list-group-item" *ngFor = "let overdue of overdueTasks"> {{overdue.name}} - {{overdue.priority}} - {{overdue.dueDate}}</li>
+        </ul> -->
     </div>
 
-    <div class="col-sm-4 col-sm-offset-2 ">
+    <div class="col-sm-4 col-sm-offset-1 ">
       <h2>Pending Tasks</h2>
+      <table class="talbe table-striped" [mfData]="data" #mf = "mfDataTable" [mfRowsOnPage]="10">
+          <thead>
+            <tr>
+              <th style="width: 33%"> 
+                <mfDefaultSorter by="name">Name</mfDefaultSorter>
+              </th>
+              <th style="width: 33%">
+                  <mfDefaultSorter by="priority">Priority</mfDefaultSorter>
+              </th>
+              <th style="width: 33%">
+                  <mfDefaultSorter by="dueDate">Due date</mfDefaultSorter>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor = "let pending of pendingTasks">
+              <td>{{pending.name}}</td>
+              <td>{{pending.priority}}</td>
+              <td>{{pending.dueDate}}</td>
+            </tr>
+          </tbody>
+        </table>
+      <!-- <ul class="list-group">
+        <li class="list-group-item" *ngFor = "let pending of pendingTasks"> {{pending.name}} - {{pending.priority}} - {{pending.dueDate}}</li>
+      </ul> -->
     </div>
   </div>
 </div>

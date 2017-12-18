@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Moment } from 'moment/moment'
+import * as moment from 'moment';
+import {DataTableModule} from "angular2-datatable";
 
 @Component({
   selector: 'app-filter',
@@ -8,20 +9,22 @@ import { Moment } from 'moment/moment'
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit {
-  moment = require('moment');
+moment = moment();
 pendingTasks : Task;
 overdueTasks : Task;
+@Input() updateList:boolean;
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    let pendingQuery = ['dueDate','>=', this.moment().format()];
-    let overdueQuery = ['dueDate','<', this.moment().format()];
+    let pendingQuery = ['dueDate','>=', this.moment.format()];
+    let overdueQuery = ['dueDate','<', this.moment.format()];
     this.http.get<Task>('http://localhost:3000/task',{
       params:{
         where : JSON.stringify([pendingQuery])
       }
     }).subscribe( data =>{
         this.pendingTasks = data;
+        
     })
     this.http.get<Task>('http://localhost:3000/task', {
       params:{
@@ -29,9 +32,19 @@ overdueTasks : Task;
       }
     }).subscribe( data =>{
       this.overdueTasks = data;
+      
   })
   }
-
+updatePending(list:boolean){
+  let pendingQuery = ['dueDate','>=', this.moment.format()]; 
+  this.http.get<Task>('http://localhost:3000/task',{
+    params:{
+      where : JSON.stringify([pendingQuery])
+    }
+  }).subscribe( data =>{
+      this.pendingTasks = data;      
+  })
+}
 }
 
 interface Task{

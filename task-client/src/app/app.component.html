@@ -4,5 +4,5 @@
     Welcome to {{ title }}!
   </h1>
 </div>
-<app-create-task></app-create-task>
-<app-filter></app-filter>
+<app-create-task (onUpdateList)="onUpdateList($event)"></app-create-task>
+<app-filter [updateList] = "updateList" ></app-filter>
